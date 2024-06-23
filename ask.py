@@ -1,4 +1,3 @@
-#!/home/svobop/PycharmProjects/ollama_sandbox/.venv/bin/python
 import ollama
 import subprocess
 import click
@@ -8,7 +7,7 @@ import json
 @click.option('--model', default='phi3', help='ollama model')
 @click.argument('question')
 def ask(question, model):
-    """Aks ollama to about linux commands"""
+    """Ask ollama to about linux commands"""
     response = ollama.chat(model=model, messages=[
         {
             'role': 'system',
@@ -43,10 +42,13 @@ def ask(question, model):
     elif explain:
         click.echo(explain)
     elif explain and dangerous:
-        click.secho(explain, fg='green')
+        click.secho(explain, fg='red')
     else:
         raise ValueError(f'Invalid response from the model \n {response}')
 
+def main():
+    ask()
+
 
 if __name__ == '__main__':
-    ask()
+    main()
